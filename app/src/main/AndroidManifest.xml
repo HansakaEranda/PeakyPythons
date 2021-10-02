@@ -9,6 +9,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SLbus">
         <activity
+            android:name=".Bookings"
+            android:exported="true"
+            android:label="Bookings"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".AddBooking"
+            android:exported="true"
+            android:label="Add Booking"
+            android:parentActivityName=".MainActivity"/>/>
+        <activity
             android:name=".UpdateActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity" />

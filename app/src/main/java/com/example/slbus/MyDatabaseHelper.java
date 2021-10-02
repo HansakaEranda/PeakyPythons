@@ -20,6 +20,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_START_TIME = "start_time";
     private static final String COLUMN_END_TIME = "end_time";
 
+    private static final String table_name = "my_bookings";
+    private static final String column_id = "_id";
+    private static final String column_from = "_from";
+    private static final String column_to = "_to";
+    private static final String column_date = "_date";
+    private static final String column_start_time= "start_time";
+    private static final String column_bus_id = "bus_id";
+    private static final String column_pname = "passenger_name";
+    private static final String column_seat_no = "seat_no";
+    private static final String column_number = "_telephone";
+
 
     MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
@@ -35,11 +46,24 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_END_TIME + " TEXT);";
         db.execSQL(query);
 
+        String Query = "CREATE TABLE " + table_name +
+                " (" + column_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                column_from + " TEXT, " +
+                column_to + " TEXT, " +
+                column_date + " TEXT, " +
+                column_start_time + " TEXT, " +
+                column_bus_id + " TEXT, " +
+                column_pname + " TEXT, " +
+                column_seat_no + " INTEGER, " +
+                column_number + " INTEGER);";
+        db.execSQL(Query);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+       // db.execSQL("DROP TABLE IF EXISTS " + table_name);
         onCreate(db);
 
     }
@@ -58,6 +82,28 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    void addBooking(String from, String to, String date, String time, String busID, String pname, int seatno, int phone){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(column_from, from);
+        cv.put(column_to, to);
+        cv.put(column_date, date);
+        cv.put(column_start_time, time);
+        cv.put(column_bus_id, busID);
+        cv.put(column_pname, pname);
+        cv.put(column_seat_no, seatno);
+        cv.put(column_number, phone);
+        long result = db.insert(table_name,null, cv);
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME;

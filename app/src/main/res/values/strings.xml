@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SLbus</string>
+    <string name="btnbkadd">Add Booking</string>
+    <string name="et_from">From</string>
+    <string name="et_to">To</string>
+    <string name="et_date">Date : YYYY/MM/DD</string>
+    <string name="et_time">Time : 24 Hours</string>
+    <string name="et_bid">Bus ID</string>
+    <string name="et_pname">Passenger name</string>
+    <string name="et_seat">Seat No.</string>
+    <string name="et_phone">Mobile number : 07XXXXXXXX</string>
 </resources>
