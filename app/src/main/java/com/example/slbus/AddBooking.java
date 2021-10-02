@@ -2,6 +2,7 @@ package com.example.slbus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +30,7 @@ public class AddBooking extends AppCompatActivity {
         btnbkadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(AddBooking.this);
+                MyDatabaseHelper1 myDB = new MyDatabaseHelper1(AddBooking.this);
                 myDB.addBooking(et_from.getText().toString().trim(),
                         et_to.getText().toString().trim(),
                         et_date.getText().toString().trim(),
@@ -38,6 +39,9 @@ public class AddBooking extends AppCompatActivity {
                         et_pname.getText().toString().trim(),
                         Integer.valueOf(et_seat.getText().toString().trim()),
                         Integer.valueOf(et_phone.getText().toString().trim()));
+
+                Intent intent= new Intent(AddBooking.this, Bookings.class);
+                startActivity(intent);
             }
         });
 
