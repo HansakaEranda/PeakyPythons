@@ -1,6 +1,7 @@
 package com.example.slbus;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -20,6 +21,7 @@ public class Bookings extends AppCompatActivity {
 
     MyDatabaseHelper1 myDB;
     ArrayList<String> id, from, to, date, time, busID, pname, seatno, phone;
+    CustomAdapterK customAdapterK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class Bookings extends AppCompatActivity {
         phone = new ArrayList<>();
 
         StoreBookings();
+
+        customAdapterK = new CustomAdapterK(Bookings.this, id, from, to, date, time, busID, pname, seatno, phone);
+        bkrview.setAdapter(customAdapterK);
+        bkrview.setLayoutManager(new LinearLayoutManager(Bookings.this));
 
     }
 
