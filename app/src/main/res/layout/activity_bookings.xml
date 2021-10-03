@@ -26,8 +26,10 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="true"
+        app:backgroundTint="@color/design_default_color_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_booking"
+        app:rippleColor="@color/white"
+        app:srcCompat="@drawable/ic_add"
         tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

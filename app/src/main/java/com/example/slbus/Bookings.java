@@ -1,5 +1,6 @@
 package com.example.slbus;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,10 +52,18 @@ public class Bookings extends AppCompatActivity {
 
         StoreBookings();
 
-        customAdapterK = new CustomAdapterK(Bookings.this, id, from, to, date, time, busID, pname, seatno, phone);
+        customAdapterK = new CustomAdapterK(Bookings.this,this ,id, from, to, date, time, busID, pname, seatno, phone);
         bkrview.setAdapter(customAdapterK);
         bkrview.setLayoutManager(new LinearLayoutManager(Bookings.this));
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            recreate();
+        }
     }
 
     void StoreBookings() {

@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -100,37 +99,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.delete_all){
-            confirmDialog();
+        if(item.getItemId() == R.id.menubook){
+            Intent intent= new Intent(MainActivity.this, Bookings.class);
+            startActivity(intent);
+        }else if(item.getItemId() == R.id.menutimetable){
+            Intent intent= new Intent(MainActivity.this, AddActivity.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    void confirmDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete All?");
-        builder.setMessage("Are you sure you want to delete all Data?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
-                myDB.deleteAllData();
-                //Refresh Activity
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.create().show();
-    }
-
 
 
 }

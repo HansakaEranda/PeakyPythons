@@ -9,4 +9,7 @@
     <string name="et_pname">Passenger name</string>
     <string name="et_seat">Seat No.</string>
     <string name="et_phone">Mobile number : 07XXXXXXXX</string>
+    <string name="btndelete">Delete</string>
+    <string name="menubook">Bookings</string>
+    <string name="timetable">Timetables</string>
 </resources>

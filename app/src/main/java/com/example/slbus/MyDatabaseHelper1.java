@@ -25,7 +25,7 @@ public class MyDatabaseHelper1 extends SQLiteOpenHelper {
     private static final String column_seat_no = "seat_no";
     private static final String column_number = "_telephone";
 
-    public MyDatabaseHelper1(@Nullable Context context) {
+    MyDatabaseHelper1(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context=context;
     }
@@ -81,6 +81,16 @@ public class MyDatabaseHelper1 extends SQLiteOpenHelper {
             crsr = db.rawQuery(query, null);
         }
         return crsr;
+    }
+
+    void deleteonerow(String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(table_name, "_id=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Failed to Delete", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Successfully Deleted!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

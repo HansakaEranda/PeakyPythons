@@ -1,13 +1,17 @@
 package com.example.slbus;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,11 +19,13 @@ import java.util.ArrayList;
 public class CustomAdapterK extends RecyclerView.Adapter<CustomAdapterK.MyViewholder> {
 
     private Context context;
-    //private Activity activity;
+    private Activity activitY;
     private ArrayList id, from, to, date, time, busID, pname, seatno, phone;
 
-    CustomAdapterK(Context context, ArrayList id, ArrayList from, ArrayList to, ArrayList date, ArrayList time, ArrayList busID, ArrayList pname, ArrayList seatno, ArrayList phone) {
-        //this.activity = activity;
+
+
+    CustomAdapterK(Activity activitY, Context context, ArrayList id, ArrayList from, ArrayList to, ArrayList date, ArrayList time, ArrayList busID, ArrayList pname, ArrayList seatno, ArrayList phone) {
+        this.activitY = activitY;
         this.context = context;
         this.id = id;
         this.from = from;
@@ -43,7 +49,8 @@ public class CustomAdapterK extends RecyclerView.Adapter<CustomAdapterK.MyViewho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewholder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewholder holder, @SuppressLint("RecyclerView") int position) {
+
         holder.txtid.setText(String.valueOf(id.get(position)));
         holder.txtfrom.setText(String.valueOf(from.get(position)));
         holder.txtto.setText(String.valueOf(to.get(position)));
@@ -51,6 +58,21 @@ public class CustomAdapterK extends RecyclerView.Adapter<CustomAdapterK.MyViewho
         holder.txttime.setText(String.valueOf(time.get(position)));
         holder.txtbusid.setText(String.valueOf(busID.get(position)));
         holder.txtseatno.setText(String.valueOf(seatno.get(position)));
+        holder.mainlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BookingDetails.class);
+                intent.putExtra("id", String.valueOf(id.get(position)));
+                intent.putExtra("from", String.valueOf(from.get(position)));
+                intent.putExtra("to", String.valueOf(to.get(position)));
+                intent.putExtra("date", String.valueOf(date.get(position)));
+                intent.putExtra("time", String.valueOf(time.get(position)));
+                intent.putExtra("busid", String.valueOf(busID.get(position)));
+                intent.putExtra("seatno", String.valueOf(seatno.get(position)));
+                activitY.startActivityForResult(intent,1);
+
+            }
+        });
 
     }
 
@@ -62,6 +84,8 @@ public class CustomAdapterK extends RecyclerView.Adapter<CustomAdapterK.MyViewho
     public class MyViewholder extends RecyclerView.ViewHolder {
 
         TextView txtid, txtfrom, txtto, txtdate, txttime, txtbusid, txtseatno;
+        ConstraintLayout mainlayout;
+        //LinearLayout mainlayout;
 
         public MyViewholder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +96,7 @@ public class CustomAdapterK extends RecyclerView.Adapter<CustomAdapterK.MyViewho
             txttime = itemView.findViewById(R.id.txttime);
             txtbusid = itemView.findViewById(R.id.txtbusid);
             txtseatno = itemView.findViewById(R.id.txtseatno);
+            mainlayout = itemView.findViewById(R.id.mainlayout);
         }
     }
 }
